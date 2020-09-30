@@ -14,12 +14,6 @@ ARG SERVER_VERSION=${VERSION}
 ARG CLIENT_VERSION=8.0.0
 ARG WEBUI_VERSION=8.0.0
 
-LABEL org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.url="https://alerta.io" \
-      org.label-schema.vcs-url="https://github.com/alerta/docker-alerta" \
-      org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.version=$VERSION \
-      org.label-schema.schema-version="1.0.0-rc.1"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -51,7 +45,9 @@ RUN pip install pip virtualenv && \
     /venv/bin/pip install -r /app/requirements.txt
 ENV PATH $PATH:/venv/bin
 
-RUN /venv/bin/pip install alerta==${CLIENT_VERSION} alerta-server-shakti
+RUN /venv/bin/pip install alerta==${CLIENT_VERSION} 
+RUN /venv/bin/pip install alerta-server-shakti
+
 COPY install-plugins.sh /app/install-plugins.sh
 COPY plugins.txt /app/plugins.txt
 RUN /app/install-plugins.sh
