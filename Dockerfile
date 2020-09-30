@@ -51,7 +51,7 @@ RUN pip install pip virtualenv && \
     /venv/bin/pip install -r /app/requirements.txt
 ENV PATH $PATH:/venv/bin
 
-RUN /venv/bin/pip install alerta==${CLIENT_VERSION} alerta-server==${SERVER_VERSION}
+RUN /venv/bin/pip install alerta==${CLIENT_VERSION} alerta-server-shakti
 COPY install-plugins.sh /app/install-plugins.sh
 COPY plugins.txt /app/plugins.txt
 RUN /app/install-plugins.sh
